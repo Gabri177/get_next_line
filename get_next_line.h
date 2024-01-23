@@ -22,8 +22,12 @@
 # include <fcntl.h>
 # include <unistd.h>
 
-char	*get_next_line(int fd);
-void	*ft_calloc(size_t num_elements, size_t element_size);
-char	*ft_strjoin(const char *str1, const char *str2);
+char			*get_next_line(int fd);
+void			*ft_calloc(size_t num_elements, size_t element_size);
+char			*ft_strjoin(const char *str1, const char *str2);
+size_t			ft_strlen(const char *str);
+size_t			ft_strlcpy(char *dest, const char *src, size_t size);
+unsigned int	ft_strlcat(char *dest, char *src, unsigned int size);
+
 
 #endif

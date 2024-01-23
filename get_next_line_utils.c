@@ -26,6 +26,62 @@ void	*ft_calloc(size_t num_elements, size_t element_size)
 	return ((void *)fin);
 }
 
+size_t	ft_strlen(const char *str)
+{
+	size_t	count;
+
+	count = 0;
+	while (*str)
+	{
+		count ++;
+		str ++;
+	}
+	return (count);
+}
+
+size_t	ft_strlcpy(char *dest, const char *src, size_t size)
+{
+	size_t	i;
+
+	if (size != 0)
+	{
+		i = 0;
+		while (i < size - 1 && src[i])
+		{
+			dest[i] = src[i];
+			i ++;
+		}
+		dest[i] = '\0';
+	}
+	return (ft_strlen ((char *)src));
+}
+
+unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
+{
+	unsigned int	index;
+	unsigned int	len;
+
+	len = 0;
+	index = 0;
+	while (dest[len] != '\0')
+		len ++;
+	while (src[index] != '\0' && len + 1 < size)
+	{
+		dest[len] = src[index];
+		index ++;
+		len ++;
+	}
+	dest[len] = '\0';
+	if (len > size)
+		len = size;
+	while (src[index] != '\0')
+	{
+		index ++;
+		len ++;
+	}
+	return (len);
+}
+
 char	*ft_strjoin(const char *str1, const char *str2)
 {
 	size_t	len1;
