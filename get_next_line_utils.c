@@ -6,7 +6,7 @@
 /*   By: yugao <yugao@student.42madrid.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 21:42:35 by yugao             #+#    #+#             */
-/*   Updated: 2024/01/26 23:36:46 by yugao            ###   ########.fr       */
+/*   Updated: 2024/01/27 05:11:01 by yugao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ char	*find_char(char *str, char obj)
 {
 	if (!str)
 		return (NULL);
+	if (obj == '\0')
+		return ((char *)&str[str_len (str)]);
 	while (*str && *str != obj)
 		str ++;
 	if (*str == obj)
@@ -23,7 +25,7 @@ char	*find_char(char *str, char obj)
 	return (NULL);
 }
 
-char	*ft_call(int size)
+char	*ft_call(size_t size)
 {
 	char	*tem;
 	size_t	i;
@@ -32,8 +34,11 @@ char	*ft_call(int size)
 	tem = (char *) malloc (sizeof (char) * (size));
 	if (!tem)
 		return (NULL);
-	while (tem[i])
-		tem[i] = 0;
+	while (i < sizeof (char) * (size))
+	{
+		tem[i] = '\0';
+		i ++;
+	}
 	return (tem);
 }
 
@@ -57,9 +62,9 @@ char	*merge(char *str1, char *str2)
 	j = 0;
 	if (!str1)
 		str1 = ft_call (1);
-	if (!str1)
+	if (!str1 || !str2)
 		return (NULL);
-	tem = ft_call (str_len (str1) + str_len(str2) + 1);
+	tem = malloc (sizeof (char) * (str_len (str1) + str_len(str2) + 1));
 	if (!tem)
 		return (NULL);
 	while (str1[i])
@@ -67,14 +72,13 @@ char	*merge(char *str1, char *str2)
 		tem[i] = str1[i];
 		i ++;
 	}
-	if (!str2)
-		return (str1);
 	while (str2[j])
 		tem[i ++] = str2[j ++];
+	tem [i] = 0;
+	free (str1);
 	return (tem);
 }
 
-// + \0
 char	*str_cp(char *str, size_t len)
 {
 	size_t	i;
@@ -85,7 +89,7 @@ char	*str_cp(char *str, size_t len)
 	if (len > str_len (str))
 		len = str_len (str);
 	i = 0;
-	tem = ft_call (len + 1);
+	tem = malloc (sizeof (char) * (len + 1));
 	if (!tem)
 		return (tem);
 	while (str[i] && i < len)
@@ -93,5 +97,6 @@ char	*str_cp(char *str, size_t len)
 		tem[i] = str[i];
 		i ++;
 	}
+	tem[i] = '\0';
 	return (tem);
 }
