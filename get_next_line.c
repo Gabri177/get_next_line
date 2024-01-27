@@ -6,7 +6,7 @@
 /*   By: yugao <yugao@student.42madrid.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 21:38:58 by yugao             #+#    #+#             */
-/*   Updated: 2024/01/27 05:11:56 by yugao            ###   ########.fr       */
+/*   Updated: 2024/01/27 05:15:15 by yugao            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,16 +100,12 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	buff = read_file (fd, buff);
-	//printf ("inicial01 : buff==%s==\n\n", buff);
 	if (buff == NULL)
 		return (ft_free (&buff));
 	line = get_line (buff);
-	//printf ("line02 :==%s==\n\n", line);
 	if (line == NULL)
 		return (ft_free (&buff));
-	//printf ("inicial03 : buff==%s==\n\n", buff);
 	buff = refresh_buf (buff);
-	//printf ("end: cutbuff ==%s==\n\n", buff);
 	return (line);
 }
 
